@@ -1,0 +1,14 @@
+{
+  "name": "circleci-datadog-demo",
+  "version": "1.0.0",
+  "description": "Demo project for CircleCI and Datadog integration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Running tests...\" && exit 0",
+    "build": "echo \"Building application...\" && exit 0",
+    "start": "node index.js"
+  },
+  "keywords": ["circleci", "datadog", "demo"],
+  "author": "",
+  "license": "MIT"
+}

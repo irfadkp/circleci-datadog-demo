@@ -1,0 +1,64 @@
+version: 2.1
+
+# Define a simple job
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18.0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            echo "Installing dependencies..."
+            npm --version
+      - run:
+          name: Run tests
+          command: |
+            echo "Running tests..."
+            echo "Tests passed!"
+      - run:
+          name: Build application
+          command: |
+            echo "Building application..."
+            echo "Build completed!"
+
+  test:
+    docker:
+      - image: cimg/node:18.0
+    steps:
+      - checkout
+      - run:
+          name: Run unit tests
+          command: |
+            echo "Running unit tests..."
+            sleep 2
+            echo "Unit tests passed!"
+
+  deploy:
+    docker:
+      - image: cimg/node:18.0
+    steps:
+      - checkout
+      - run:
+          name: Deploy to staging
+          command: |
+            echo "Deploying to staging environment..."
+            sleep 3
+            echo "Deployment successful!"
+
+# Define the workflow
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
